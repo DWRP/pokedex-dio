@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Default configs -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Google configs  -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700&display=swap"
+    />
+
+    <!-- Taillwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- My configs -->
+    <title>Pokedex</title>
+    <script async defer src="./src/js/model.js"></script>
+    <script async defer src="./src/js/service.js"></script>
+    <script async defer src="./src/js/components.js"></script>
+    <script async defer src="./src/js/main.js"></script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        outline: 0;
+        box-sizing: border-box;
+        font-family: Roboto, system-ui, -apple-system, BlinkMacSystemFont,
+          "Segoe UI", Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+          sans-serif;
+      }
+
+      main div::-webkit-scrollbar {
+        width: 4px;
+        border-radius: 16px;
+      }
+
+      main div::-webkit-scrollbar-track {
+        box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+        border-radius: 16px;
+      }
+
+      main div::-webkit-scrollbar-thumb {
+        border-radius: 16px;
+        background-color: rgb(203 213 225);
+        outline: 1px solid #70809088;
+      }
+    </style>
+  </head>
+  <body
+    class="w-screen h-[100vh] flex flex-col justify-between items-center gap-1 bg-slate-300 overflow-hidden"
+  >
+    <header
+      class="w-11/12 h-[10vh] flex justify-between rounded-bl-xl rounded-br-xl bg-slate-50 shadow-md px-4"
+    >
+      <div
+        class="flex items-center justify-start px-6 py-4 text-clifford font-bold text-4"
+      >
+        <img
+          class="w-6 h-6"
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Pok%C3%A9_Ball_icon.svg/2052px-Pok%C3%A9_Ball_icon.svg.png"
+          alt="pokeball"
+        />
+        <p class="h-full flex items-center justify-start">Pokedex</p>
+      </div>
+
+      <div class="flex flex-row justify-center items-center gap-2">
+        <a
+          class="w-15 h-6 flex items-center"
+          href="http://github.com/dwrp"
+          target="_blank"
+          rel="noopener noreferrer"
+          ><img
+            class="w-full h-full rounded-md hover:opacity-80"
+            src="https://img.shields.io/badge/GitHub-cbd5e1?style=for-the-badge&logo=github&logoColor=red"
+            alt="github"
+        /></a>
+
+        <a
+          class="w-15 h-6 flex items-center"
+          href="https://www.linkedin.com/in/douglas-pardim/"
+          target="_blank"
+          rel="noopener noreferrer"
+          ><img
+            class="w-full h-full rounded-md hover:opacity-80"
+            src="https://img.shields.io/badge/LinkedIn-cbd5e1?style=for-the-badge&logo=linkedin&logoColor=red"
+            alt="linkedin"
+        /></a>
+        <a
+          class="w-15 h-6 flex items-center"
+          href="mailto:douglas.skd@gmail.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          ><img
+            class="w-full h-full rounded-md hover:opacity-80"
+            src="https://img.shields.io/badge/Gmail-cbd5e1?style=for-the-badge&logo=gmail&logoColor=red"
+            alt="email"
+        /></a>
+      </div>
+    </header>
+
+    <main class="w-11/12 h-[85vh] self-center flex flex-col">
+      <div class="w-auto overflow-y-auto">
+        <div
+          id="list"
+          class="w-full flex flex-wrap justify-center gap-3 p-3"
+        ></div>
+      </div>
+
+      <div id="detail"></div>
+    </main>
+
+    <footer
+      class="w-11/12 h-[5vh] py-4 text-center bg-gray-900 text-white rounded-tl-xl rounded-tr-xl text-sm"
+    >
+      © 2023 Douglas Pardim. All Rights Reserved.
+    </footer>
+  </body>
+</html>
