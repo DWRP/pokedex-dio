@@ -1,5 +1,18 @@
+import { PokedexService } from "./service.js";
+import {
+  pokemonPhoto,
+  pokemonBody,
+  pokemonTypes,
+  cardBase,
+  carregarMaisButton,
+} from "./components.js";
+
+export const pokemonsFetched = [];
+export const currentPokemon = [];
+
 const service = new PokedexService();
-const pokemonList = document.getElementById("list");
+export const pokemonList = document.getElementById("list");
+export const pokemonDetail = document.getElementById("detail");
 
 const cardComponent = (pokemon) => {
   const photo = pokemonPhoto(pokemon.number, pokemon.photo);
@@ -9,8 +22,9 @@ const cardComponent = (pokemon) => {
   return card;
 };
 
-const getMorePokemons = async (url) => {
+export const getMorePokemons = async (url) => {
   const pokemons = await service.getAllPokemons(url.replace(service.API, "/"));
+  pokemonsFetched.push(...pokemons.pokemons);
 
   const newHtmlBody = pokemons.pokemons.map(cardComponent);
   const carregarMais = carregarMaisButton(pokemons.next);
@@ -22,8 +36,12 @@ const getMorePokemons = async (url) => {
 };
 
 async function renderPokemons() {
-  const pokemons = await service.getAllPokemons("pokemon?limit=20");
+  pokemonDetail.classList.add("hidden");
+  pokemonList.classList.remove("w-[70%]");
+  pokemonList.classList.add("w-auto");
 
+  const pokemons = await service.getAllPokemons("pokemon?limit=20");
+  pokemonsFetched.push(...pokemons.pokemons);
   const newHtmlBody = pokemons.pokemons.map(cardComponent);
   const carregarMais = carregarMaisButton(pokemons.next);
 

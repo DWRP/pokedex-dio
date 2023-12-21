@@ -1,14 +1,24 @@
-class PokedexService {
+import { Pokemon } from "./model.js";
+export class PokedexService {
   API = "https://pokeapi.co/api/v2/";
 
   pokemonDetailsToPokemon(pokeDetail) {
-    const number = pokeDetail.id;
-    const name = pokeDetail.name;
     const types = pokeDetail.types.map((typeSlot) => typeSlot.type.name);
-    const [type] = types;
-    const photo = pokeDetail.sprites.other.dream_world.front_default;
+    const pokemonDetails = {
+      number: pokeDetail.id,
+      name: pokeDetail.name,
+      types,
+      type: types[0],
+      photo: pokeDetail.sprites.other.dream_world.front_default,
+      abilities: pokeDetail.abilities.map(ability => ({
+        name: ability.ability.name,
+        isHidden: ability.is_hidden,
+      })),
+      height: `${pokeDetail.height * 10}m`,
+      weight: `${pokeDetail.weight}Kg`
+    };
 
-    return new Pokemon(number, name, type, types, photo);
+    return new Pokemon(pokemonDetails);
   }
 
   async fetchApi(endpoint) {

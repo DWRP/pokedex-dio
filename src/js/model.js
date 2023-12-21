@@ -1,15 +1,14 @@
-class Pokemon {
-  number;
-  name;
-  type;
-  types = [];
-  photo;
-
-  constructor(number, name, type, types, photo) {
-    this.number = number;
-    this.name = name;
-    this.type = type;
-    this.types = types;
-    this.photo = photo;
+export class Pokemon {
+  constructor(props) {
+    this.number = props.number;
+    this.name = props.name;
+    this.type = props.type;
+    this.types = props.types;
+    this.photo = props.photo;
+    this.abilities = props.abilities;
+    this.height = props.height;
+    this.weight = props.weight;
+    this.status = props.status;
+    this.evolution = props.evolution;
   }
 }

@@ -18,10 +18,7 @@
 
     <!-- My configs -->
     <title>Pokedex</title>
-    <script async defer src="./src/js/model.js"></script>
-    <script async defer src="./src/js/service.js"></script>
-    <script async defer src="./src/js/components.js"></script>
-    <script async defer src="./src/js/main.js"></script>
+    <script async defer src="./src/js/main.js" type="module"></script>
     <style>
       * {
         margin: 0;
@@ -102,15 +99,13 @@
       </div>
     </header>
 
-    <main class="w-11/12 h-[85vh] self-center flex flex-col">
-      <div class="w-auto overflow-y-auto">
-        <div
-          id="list"
-          class="w-full flex flex-wrap justify-center gap-3 p-3"
-        ></div>
-      </div>
+    <main class="w-11/12 h-[85vh] self-center flex flex-row">
+      <div
+        id="list"
+        class="w-[70%] flex flex-wrap justify-center gap-3 p-3 overflow-y-auto"
+      ></div>
 
-      <div id="detail"></div>
+      <div id="detail" class="w-[30%] bg-slate-100 rounded-lg ml-2 my-2 flex flex-col items-center"></div>
     </main>
 
     <footer
