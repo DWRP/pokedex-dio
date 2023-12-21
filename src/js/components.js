@@ -1,30 +1,33 @@
+import { getMorePokemons } from "./main.js";
+import { createDetailComponent } from "./detail.js";
+
 const pokemonBgColorByTypeEnum = {
-  normal: "bg-Neutral-500",
-  fire: "bg-Rose-500",
-  water: "bg-Sky-500",
-  electric: "bg-Yellow-500",
-  grass: "bg-Lime-700",
-  ice: "bg-Sky-500",
-  fighting: "bg-Red-500",
-  poison: "bg-Fuchsia-500",
-  ground: "bg-Stone-700",
-  flying: "bg-Sky-500",
-  psychic: "bg-Fuchsia-500",
-  bug: "bg-Lime-500",
-  rock: "bg-Stone-500",
-  ghost: "bg-Gray-500",
-  dark: "bg-Gray-800",
-  steel: "bg-Zinc-500",
-  fairy: "bg-Rose-300",
+  normal: "bg-neutral-500",
+  fire: "bg-rose-500",
+  water: "bg-sky-500",
+  electric: "bg-yellow-500",
+  grass: "bg-lime-700",
+  ice: "bg-sky-500",
+  fighting: "bg-red-500",
+  poison: "bg-fuchsia-500",
+  ground: "bg-stone-700",
+  flying: "bg-sky-500",
+  psychic: "bg-fuchsia-500",
+  bug: "bg-lime-500",
+  rock: "bg-stone-500",
+  ghost: "bg-gray-500",
+  dark: "bg-gray-800",
+  steel: "bg-zinc-500",
+  fairy: "bg-rose-300",
 };
 
-const setAttributeClasses = (element, classes) => {
+export const setAttributeClasses = (element, classes) => {
   if (classes && classes.length > 0) {
-    classes.forEach((className) => element.classList.add(className));
+    element.classList.add(...classes);
   }
 };
 
-const carregarMaisButton = (url) => {
+export const carregarMaisButton = (url) => {
   const div = document.createElement("div");
   div.id = "loadMore";
   setAttributeClasses(div, [
@@ -49,6 +52,7 @@ const carregarMaisButton = (url) => {
     "me-2",
     "mb-2",
     "focus:outline-none",
+    "cursor-pointer",
   ]);
   button.textContent = "Carregar Mais";
   button.addEventListener("click", () => getMorePokemons(url));
@@ -57,7 +61,7 @@ const carregarMaisButton = (url) => {
   return div;
 };
 
-const cardBase = (id, children) => {
+export const cardBase = (id, children) => {
   const div = document.createElement("div");
   div.id = `card-pokemon-${id}`;
   setAttributeClasses(div, [
@@ -70,13 +74,16 @@ const cardBase = (id, children) => {
     "items-center",
     "justify-center",
     "gap-2",
+    "cursor-pointer",
+    "hover:bg-slate-200",
   ]);
 
+  div.addEventListener("click", () => createDetailComponent(id));
   children.forEach((child) => div.appendChild(child));
   return div;
 };
 
-const pokemonBody = (name, number) => {
+export const pokemonBody = (name, number) => {
   const div = document.createElement("div");
   div.id = `body-pokemon-${number}`;
   setAttributeClasses(div, ["gap-2"]);
@@ -96,6 +103,7 @@ const pokemonBody = (name, number) => {
     "text-blue-950",
     "font-bold",
     "text-2xl",
+    "capitalize",
   ]);
   nameParagraph.textContent = name;
 
@@ -104,13 +112,14 @@ const pokemonBody = (name, number) => {
   return div;
 };
 
-const pokemonPhoto = (id, image) => {
+export const pokemonPhoto = (id, image, propWidth, propHeight) => {
+  const [width, height] = [propWidth || "w-16", propHeight || "h-16"];
   const div = document.createElement("div");
   div.id = `image-pokemon-${id}`;
-  setAttributeClasses(div, ["w-16", "h-16"]);
+  setAttributeClasses(div, [width, height]);
 
   const img = document.createElement("img");
-  setAttributeClasses(img, ["object-fit", "h-16", "w-16"]);
+  setAttributeClasses(img, ["object-fit", width, height]);
   img.src = image;
   img.alt = "pokemon-photo";
 
@@ -118,7 +127,7 @@ const pokemonPhoto = (id, image) => {
   return div;
 };
 
-const pokemonTypes = (id, types) => {
+export const pokemonTypes = (id, types) => {
   const div = document.createElement("div");
   div.id = `types-pokemon-${id}`;
   setAttributeClasses(div, ["flex", "flex-wrap", "justify-center", "gap-1"]);
@@ -138,6 +147,102 @@ const pokemonTypes = (id, types) => {
     p.textContent = type;
     div.appendChild(p);
   });
+
+  return div;
+};
+
+export const buttonDefault = (text, isHidden) => {
+  const button = document.createElement("button");
+  setAttributeClasses(button, [
+    "flex",
+    "flex-row",
+    "justify-center",
+    "items-center",
+    "rounded-3xl",
+    "bg-gray-200",
+    "py-1",
+    "px-1",
+    "m-2",
+    "capitalize",
+    "cursor-default",
+    "w-28",
+    "h-8",
+    "text-sm",
+  ]);
+
+  const buttonText = document.createElement("span");
+  buttonText.innerText = text;
+  setAttributeClasses(buttonText, ["mr-4"]);
+
+  const buttonIcon = document.createElement("img");
+  buttonIcon.setAttribute("src", "src/assets/olho-vermelho.png");
+
+  setAttributeClasses(buttonIcon, ["object-fit"]);
+
+  button.appendChild(buttonText);
+
+  isHidden && button.appendChild(buttonIcon);
+
+  return button;
+};
+
+export const abilitiesCard = (abilities, hasBorder = false) => {
+  const div = document.createElement("div");
+  div.innerText = "Abilities";
+  setAttributeClasses(div, [
+    "flex",
+    "flex-col",
+    "justity-center",
+    "items-center",
+    "mt-8",
+    "font-bold",
+    "uppercase",
+  ]);
+
+  const divAbilities = document.createElement("div");
+  setAttributeClasses(divAbilities, ["flex", "flex-wrap", 'justify-center']);
+
+  abilities.forEach((ability) => {
+    const button = buttonDefault(ability.name, ability.isHidden);
+    const borderStyle = ability.isHidden ? "border-blue-500" : "border-red-500";
+    setAttributeClasses(button, [
+      hasBorder && borderStyle,
+      hasBorder && "border-[1px]",
+    ]);
+    divAbilities.appendChild(button);
+  });
+
+  div.appendChild(divAbilities);
+
+  return div;
+};
+
+export const infosCard = (infos) => {
+  const div = document.createElement("div");
+  setAttributeClasses(div, [
+    "flex",
+    "flex-col",
+    "justity-center",
+    "items-center",
+    "mt-8",
+    "font-bold",
+    "uppercase",
+  ]);
+
+  const divAbilities = document.createElement("div");
+  setAttributeClasses(divAbilities, ["flex", "flex-wrap", 'justify-center']);
+
+  infos.forEach((info) => {
+    const titleInfo = document.createElement("div");
+    setAttributeClasses(titleInfo, ["flex", "flex-col", "items-center"]);
+
+    const button = buttonDefault(info.value);
+    titleInfo.innerText = info.title;
+    titleInfo.appendChild(button);
+    divAbilities.appendChild(titleInfo);
+  });
+
+  div.appendChild(divAbilities);
 
   return div;
 };
