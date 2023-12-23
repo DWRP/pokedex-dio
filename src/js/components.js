@@ -65,7 +65,7 @@ export const cardBase = (id, children) => {
   const div = document.createElement("div");
   div.id = `card-pokemon-${id}`;
   setAttributeClasses(div, [
-    "w-52",
+    "w-[100%]",
     "h-44",
     "rounded-2xl",
     "bg-slate-50",
@@ -76,6 +76,9 @@ export const cardBase = (id, children) => {
     "gap-2",
     "cursor-pointer",
     "hover:bg-slate-200",
+    "md:w-72",
+    "lg:w-62",
+    "xl:w-52",
   ]);
 
   div.addEventListener("click", () => createDetailComponent(id));

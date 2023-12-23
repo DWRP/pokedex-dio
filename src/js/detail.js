@@ -21,12 +21,14 @@ export const closeDetail = () => {
 };
 
 export function createDetailComponent(id) {
-  if (window.innerWidth < 600) {
+  if (window.innerWidth < 900) {
     pokemonList.classList.add("hidden");
+    
     pokemonDetail.classList.remove("w-[30%]");
     pokemonDetail.classList.add("w-[100%]");
   } else {
     pokemonList.classList.remove("hidden");
+
     pokemonDetail.classList.add("w-[30%]");
     pokemonDetail.classList.remove("w-[100%]");
   }
