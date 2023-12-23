@@ -40,7 +40,7 @@ async function renderPokemons() {
   pokemonList.classList.remove("w-[70%]");
   pokemonList.classList.add("w-auto");
 
-  const pokemons = await service.getAllPokemons("pokemon?limit=20");
+  const pokemons = await service.getAllPokemons("pokemon?limit=21");
   pokemonsFetched.push(...pokemons.pokemons);
   const newHtmlBody = pokemons.pokemons.map(cardComponent);
   const carregarMais = carregarMaisButton(pokemons.next);
