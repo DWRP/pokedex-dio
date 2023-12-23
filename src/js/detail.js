@@ -16,15 +16,27 @@ export const closeDetail = () => {
   pokemonDetail.classList.add("hidden");
   pokemonList.classList.remove("w-[70%]");
   pokemonList.classList.add("w-auto");
+  pokemonList.classList.remove("hidden");
   currentPokemon.pop();
 };
 
 export function createDetailComponent(id) {
+  if (window.innerWidth < 600) {
+    pokemonList.classList.add("hidden");
+    pokemonDetail.classList.remove("w-[30%]");
+    pokemonDetail.classList.add("w-[100%]");
+  } else {
+    pokemonList.classList.remove("hidden");
+    pokemonDetail.classList.add("w-[30%]");
+    pokemonDetail.classList.remove("w-[100%]");
+  }
+
   if (currentPokemon.length === 0) {
     pokemonDetail.classList.remove("hidden");
     pokemonList.classList.add("w-[70%]");
     pokemonList.classList.remove("w-auto");
   }
+
   currentPokemon.pop();
   const detailContainer = document.getElementById("detail");
   detailContainer.innerHTML = "";
@@ -53,9 +65,9 @@ export function createDetailComponent(id) {
     "hover:bg-gray-400",
     "cursor-pointer"
   );
+  closeButton.addEventListener("click", closeDetail);
 
   closeContainer.appendChild(closeButton);
-  closeContainer.addEventListener("click", closeDetail);
 
   const pokemon = pokemonsFetched.find((pokemon) => pokemon.number === id);
 
