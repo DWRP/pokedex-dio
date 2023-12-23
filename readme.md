@@ -2,6 +2,11 @@
 
 Welcome to the Pokedex Web App project, named "pokedex-dio," developed for Digital Innovation One (DIO). This project is a single-page application that serves as a Pokedex, allowing users to explore a list of Pokémon and view detailed information about each Pokémon. The application is built using HTML, CSS, and JavaScript, featuring a clean and responsive user interface.
 
+
+<div align="center">
+  <img src="https://github.com/DWRP/pokedex-dio/assets/34161002/00c422eb-f69b-4dfa-8509-5d21ccb4bec2" alt="pokedex preview" width="640" height="640" />
+</div>
+
 ## Table of Contents
 
 - [Pokedex Web App](#pokedex-web-app)
